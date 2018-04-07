@@ -38,7 +38,7 @@ class GoldenEagle extends Bird
     echo "I'm hunt flying";
     }
    
-
+}
 class Duck extends Bird
 {
     //To do
