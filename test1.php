@@ -77,16 +77,26 @@ class Agenda
     public function deletePerson(Person $person)
     {
         //To do 
-        unset($person); 
+        //unset($person); 
+        // Ha de ser:
+        foreach($this->persons as $key => $currentPerson){
+            if($currentPerson == $person){
+                unset($this->persons[$key]);
+            }
+        }
+        
+        //Buscas la persona y una vez la encuentras, la borras.
     }
 
     public function deletePersonByDni($dni) 
     {
         //To do 
         
-        foreach ($this->persons as $fulanito) {
+        foreach ($this->persons as $key => $fulanito) {
                 if ($fulanito->getDni()== $dni) {
-                   unset($fulanito);
+                   //unset($fulanito);
+                    //Has de borrar del array
+                    unset($this->persons[$key]);
                    }
         }
         
@@ -98,27 +108,42 @@ class Agenda
        foreach ($this->persons as $fulanito) {
                 if ($fulanito->getDni()== $dni) {
                     return $fulanito;
-                    $resultPerson = $fulanito;
+                    //Esto no hace falta $resultPerson = $fulanito;
                     }
         }
     }
 
     public function searchPersonsByName($name)
     {
+        //Fijate en el nombre, search personS plural, hemos de buscar varias
+        
+        $results = [];
+        
         //To do
        foreach ($this->persons as $fulanito) {
                 if ($fulanito->getName()== $name) {
-                    return $fulanito;
+                    //return $fulanito;
+                    //Si encontramos añadimos al array de resultados
+                    $results[] = $fulanito;
                     }
         }            
+        //AL terminar lo retornamos
+        return $results;
     }
 
     public function getAllPersonByAge() // Lo de by age...
     {
         //To do order
-        $all=$this->persons;
-        return $all;  
+        
+        $all=$this->ordernar($this->persons);
+        return $all;
        
+    }
+    
+    //Es private, ya que es para uso interno, no lo exponemos afuera
+    private function ordenar(array $persons){
+      //Ordenamos primero y luego retornamos
+      return $persons;
     }
 }
 
